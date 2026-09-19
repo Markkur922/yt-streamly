@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "autoprefixer": "^10.6.1",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.11.0",
     "dotenv": "17.3.1",
@@ -23,7 +24,7 @@
     "tsx": "^4.23.13"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.1.17",
+    "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "22.19.15",
     "@types/pg": "8.18.0",
     "@types/react": "19.2.14",
@@ -31,7 +32,7 @@
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
-    "postcss": "8.5.8",
+    "postcss": "^8.5.8",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"
   }
