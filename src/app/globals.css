@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ------------------------------- Темы ---------------------------------- */
+:root {
+  --bg: #ffffff;
+  --bg-elev: #ffffff;
+  --bg-secondary: #f9f9f9;
+  --hover: rgba(0, 0, 0, 0.06);
+  --text: #0f0f0f;
+  --text-2: #606060;
+  --border: rgba(0, 0, 0, 0.12);
+  --chip: #f2f2f2;
+  --accent: #ff0000;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --bg-elev: #1f1f1f;
+  --bg-secondary: #161616;
+  --hover: rgba(255, 255, 255, 0.1);
+  --text: #f1f1f1;
+  --text-2: #aaaaaa;
+  --border: rgba(255, 255, 255, 0.14);
+  --chip: #272727;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --------------------------- Вспомогательные ---------------------------- */
+.bg-base { background: var(--bg); }
+.bg-elev { background: var(--bg-elev); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-chip { background: var(--chip); }
+.text-base { color: var(--text); }
+.text-2 { color: var(--text-2); }
+.border-var { border-color: var(--border); }
+.hoverable { transition: background-color 0.15s ease; }
+.hoverable:hover { background: var(--hover); }
+.shadow-pop { box-shadow: var(--shadow); }
+.accent { color: var(--accent); }
+
+/* ------------------------------ Скроллбары ------------------------------ */
+::-webkit-scrollbar { width: 12px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+  border: 3px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-2); }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ------------------------------ Скелетоны ------------------------------- */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--chip);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(128, 128, 128, 0.18),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* ------------------------------ Анимации -------------------------------- */
+@keyframes pop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.menu-pop { animation: pop 0.14s ease-out; transform-origin: top right; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.35s ease both; }
+.stagger > * { animation: fade-up 0.35s ease both; }
+.stagger > *:nth-child(2) { animation-delay: 0.04s; }
+.stagger > *:nth-child(3) { animation-delay: 0.08s; }
+.stagger > *:nth-child(4) { animation-delay: 0.12s; }
+.stagger > *:nth-child(5) { animation-delay: 0.16s; }
+.stagger > *:nth-child(6) { animation-delay: 0.2s; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-in { animation: toast-in 0.25s ease; }
+
+/* ------------------------------- Плеер ---------------------------------- */
+.player-gradient {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+}
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+}
+input[type="range"].slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+}
+input[type="range"].seek {
+  background: linear-gradient(
+    to right,
+    var(--accent) var(--played, 0%),
+    rgba(255, 255, 255, 0.3) var(--played, 0%)
+  );
+  transition: height 0.1s ease;
+}
+input[type="range"].seek::-webkit-slider-thumb {
+  width: 0;
+  height: 0;
+  background: var(--accent);
+  transition: width 0.1s ease, height 0.1s ease;
+}
+.group\/player:hover input[type="range"].seek::-webkit-slider-thumb,
+input[type="range"].seek:active::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+}
+input[type="range"].seek::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  background: var(--accent);
+}
+.group\/player:hover input[type="range"].seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+}
+
+/* Тонкие поля формы */
+.field {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field:focus {
+  border-color: #3ea6ff;
+  box-shadow: 0 0 0 1px #3ea6ff;
+}
+.field::placeholder { color: var(--text-2); }
