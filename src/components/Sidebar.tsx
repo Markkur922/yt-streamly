@@ -205,7 +205,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       ))}
 
       <p className="mt-4 px-3 text-xs leading-relaxed text-2">
-        Streamly · демо-проект
+        Streamly · 
         <br />
         видеоплатформа
       </p>
