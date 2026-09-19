@@ -244,35 +244,6 @@ export default function AuthPage() {
                 Двухфакторная аутентификация (скоро)
               </label>
             )}
-
-            <div className="mt-6 space-y-2 rounded-2xl border border-dashed border-var p-4 text-center">
-              <p className="text-xs text-2">
-                Пользователь: <b>user@streamly.com</b> · <b>user123</b>
-                <button
-                  onClick={() => {
-                    setMode("login");
-                    setEmail("user@streamly.com");
-                    setPassword("user123");
-                  }}
-                  className="ml-2 font-medium text-[#3ea6ff] hover:underline"
-                >
-                  Заполнить
-                </button>
-              </p>
-              <p className="text-xs text-2">
-                Админ: <b>admin@streamly.com</b> · <b>admin123</b>
-                <button
-                  onClick={() => {
-                    setMode("login");
-                    setEmail("admin@streamly.com");
-                    setPassword("admin123");
-                  }}
-                  className="ml-2 font-medium text-[#3ea6ff] hover:underline"
-                >
-                  Заполнить
-                </button>
-              </p>
-            </div>
           </>
         ) : (
           <>
