@@ -11,12 +11,12 @@ import {
   MessagesSquare,
   ListVideo,
   Play,
-  CheckCircle2,
 } from "lucide-react";
 import type { ChannelData, VideoCardData, PlaylistData } from "@/lib/types";
 import { useAuth, useToast } from "@/components/Providers";
 import { Avatar } from "@/components/Avatar";
 import { VideoCard, VideoCardSkeleton } from "@/components/VideoCard";
+import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { formatSubs, formatViews, formatDateRu } from "@/lib/format";
 
 type Tab = "videos" | "playlists" | "about" | "community";
@@ -156,7 +156,7 @@ export function ChannelView({ id }: { id: string }) {
             <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight sm:text-3xl">
               {channel.name}
               {channel.isVerified && (
-                <CheckCircle2 size={24} className="shrink-0 text-2" />
+                <VerifiedBadge className="w-6 h-6 sm:w-7 sm:h-7" />
               )}
             </h1>
             <p className="mt-1 text-sm text-2">

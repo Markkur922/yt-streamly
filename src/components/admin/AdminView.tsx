@@ -10,17 +10,16 @@ import {
   Pencil,
   Trash2,
   TriangleAlert,
-  CheckCircle2,
   Ban,
   X,
   Loader2,
   Globe,
   Link2,
   Lock,
-  BadgeCheck,
 } from "lucide-react";
 import { useToast } from "@/components/Providers";
 import { Avatar } from "@/components/Avatar";
+import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { CATEGORIES } from "@/lib/constants";
 import { formatViews, formatDuration, formatDateRu, timeAgo } from "@/lib/format";
 
@@ -313,11 +312,11 @@ function VideosModeration({
     setBusyId(v.id);
     try {
       const res = await fetch(`/api/admin/videos/${v.id}`, { method: "DELETE" });
-      const data = await res.json().catch(() => ({}));
+      await res.json().catch(() => ({}));
       if (res.ok) {
         setItems((prev) => prev.filter((x) => x.id !== v.id));
         toast("Видео удалено");
-      } else toast(data.error || "Не удалось удалить");
+      } else toast("Не удалось удалить");
     } catch {
       toast("Сетевая ошибка");
     } finally {
@@ -392,9 +391,7 @@ function VideosModeration({
                   className="flex items-center gap-1 hover:text-base"
                 >
                   {v.author.name}
-                  {v.author.isVerified && (
-                    <BadgeCheck size={13} className="text-[#3ea6ff]" />
-                  )}
+                  {v.author.isVerified && <VerifiedBadge className="w-3.5 h-3.5" />}
                 </Link>
                 <span className="rounded bg-chip px-1.5 py-0.5">{v.category}</span>
                 <span className="flex items-center gap-1">
@@ -661,7 +658,7 @@ function UsersManagement({
                     >
                       {u.name}
                     </Link>
-                    {u.isVerified && <BadgeCheck size={16} className="shrink-0 text-[#3ea6ff]" />}
+                    {u.isVerified && <VerifiedBadge className="w-4 h-4" />}
                     {u.role === "admin" && (
                       <span className="flex shrink-0 items-center gap-1 rounded bg-[#ff0000]/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-[#ff0000]">
                         <ShieldCheck size={11} /> админ
@@ -690,10 +687,11 @@ function UsersManagement({
 
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                 <span className="flex items-center gap-2 rounded-lg bg-chip px-3 py-2 text-xs font-medium">
-                  <CheckCircle2
-                    size={13}
-                    className={u.isVerified ? "text-[#3ea6ff]" : "text-2"}
-                  />
+                  {u.isVerified ? (
+                    <VerifiedBadge className="w-4 h-4" />
+                  ) : (
+                    <VerifiedBadge className="w-4 h-4 opacity-30 grayscale" />
+                  )}
                   Верификация
                   <Toggle
                     value={u.isVerified}

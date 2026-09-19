@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2, EyeOff } from "lucide-react";
+import { EyeOff } from "lucide-react";
 import type { VideoCardData } from "@/lib/types";
 import { formatViews, timeAgo, formatDuration } from "@/lib/format";
 import { Avatar } from "./Avatar";
+import { VerifiedBadge } from "./VerifiedBadge";
 
 export function VideoCard({
   video,
@@ -64,7 +65,7 @@ export function VideoCard({
             <Avatar src={video.author.avatarUrl} name={video.author.name} size={24} />
             <span className="truncate">{video.author.name}</span>
             {video.author.isVerified && (
-              <CheckCircle2 size={14} className="shrink-0 text-2" />
+              <VerifiedBadge className="w-3.5 h-3.5" />
             )}
           </Link>
           <p className="mt-2 hidden line-clamp-2 text-xs text-2 sm:block">
@@ -97,7 +98,7 @@ export function VideoCard({
           >
             <span className="truncate">{video.author.name}</span>
             {video.author.isVerified && (
-              <CheckCircle2 size={13} className="shrink-0" />
+              <VerifiedBadge className="w-3.5 h-3.5" />
             )}
           </Link>
           <p className="text-[13px] text-2">
